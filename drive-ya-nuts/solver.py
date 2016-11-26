@@ -1,11 +1,10 @@
-'''Solve Drive-Ya-Nuts, and variations.
+'''Solutions to Drive-Ya-Nuts, and its variations.
 
-There are 7 nuts that each have 6 rotations. So there are 6^7 ~= 1e5 candidate
-solutions, since the nuts are unique.
+There are 7 nuts, each of which can be rotated in 6 ways. So there are 6^7 ~= 
+1e5 candidate solutions, since the nuts are unique.
 
-We will find solutions by checking validity of placing nuts along the following
-ordered path. That is, we will DFS enumerate permutations of nuts along this
-path, and discard a canidate path whenever an impossibility is reached.
+We will yield solutions by iteratively placing nuts along the following
+ordered path in a DFS fashion.
 
         ___
        /   \
