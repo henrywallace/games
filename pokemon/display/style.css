@@ -1,0 +1,15 @@
+circle {
+    fill: #ccc;
+    stroke: #333;
+    stroke-width: 3px;
+}
+
+text {
+    font-family: Futura;
+    pointer-events: none;
+}
+
+text.shadow {
+    stroke: #fff;
+    stroke-width: 6px;
+}
