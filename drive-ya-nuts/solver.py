@@ -1,6 +1,6 @@
-'''Solutions to Drive-Ya-Nuts, and its variations.
+'''Solutions to Drive-Ya-Nuts and its variations.
 
-There are 7 nuts, each of which can be rotated in 6 ways. So there are 6^7 ~= 
+There are 7 nuts, each of which can be rotated in 6 ways. So there are 6^7 ~=
 1e5 candidate solutions, since the nuts are unique.
 
 We will yield solutions by iteratively placing nuts along the following
@@ -70,7 +70,7 @@ class Nut(object):
     def build_mapping(order):
         mapping = {}
         for i, val in enumerate(order):
-            mapping[val] = (order[i-1],  # can never be >= len(order)
+            mapping[val] = (order[i-1],
                             order[(i+1) % len(order)])
         return mapping
 
