@@ -1,4 +1,5 @@
-'''Solutions to Drive-Ya-Nuts and its variations.
+"""
+Solutions to Drive-Ya-Nuts and its variations.
 
 There are 7 nuts, each of which can be rotated in 6 ways. So there are 6^7 ~=
 1e5 candidate solutions, since the nuts are unique.
@@ -18,10 +19,9 @@ ordered path in a DFS fashion.
        \___/
 
 We call the ordered sequence of a nut's side values its order. The first value
-of an order is defined in code below, per nut; but this module's functions
-don't assume anything about those definitions. However, it is assumed that this
-first nut, in hexagon 1, is placed such that its first value is facing toward
-hexagon 2.
+of an order is defined in the original game, our method doesn't assume it.
+However, we do assume that the first nut in the path (nut 1 above), is placed
+such that its first value is facing toward hexagon 2.
 
 We also consider solutions in the space of all possible 7 nuts with unique
 permuted values. For a nut with 6 unique values, one for each side, there are
@@ -35,8 +35,7 @@ possible Drive-Ya-Nuts boards. Whats the distribution of number of solutions
 over all these boards?
 
 [1] http://www.cis.uoguelph.ca/~sawada/papers/alph.pdf
-
-'''
+"""
 from collections import Counter, deque
 from itertools import permutations
 from random import sample
@@ -45,8 +44,7 @@ from scipy.special import binom
 
 
 class Nut(object):
-    '''Simple data structure for faster retrieval of adjacent nut values.
-    '''
+    """Simple data structure for faster retrieval of adjacent nut values."""
     def __init__(self, order):
         self.order = order
         self.mapping = self.build_mapping(order)
@@ -70,8 +68,8 @@ class Nut(object):
     def build_mapping(order):
         mapping = {}
         for i, val in enumerate(order):
-            mapping[val] = (order[i-1],
-                            order[(i+1) % len(order)])
+            mapping[val] = (order[i - 1],
+                            order[(i + 1) % len(order)])
         return mapping
 
     def left(self, val):
@@ -97,7 +95,7 @@ nuts = {Nut(order) for order in [
 
 
 def recur(pool, path, prev):
-    '''Yield solutions to Drive-Ya-Nuts.
+    """Yield solutions to Drive-Ya-Nuts.
 
     `(path, prev)` should be initialized to `([], None)` respectively to yield
     solutions completely. And it's intended that `len(pool) == 7`, and
@@ -109,8 +107,7 @@ def recur(pool, path, prev):
         prev: previous nut value that will be left-adjacent
     Yields:
         Valid path solutions, which are each lists of `Nut`s.
-
-    '''
+    """
     if not pool:
         yield path
         return
@@ -122,7 +119,7 @@ def recur(pool, path, prev):
 
     center = path[0]
     k = len(path)
-    middle = center.order[k-1]  # center nut value facing candidate nut
+    middle = center.order[k - 1]  # center nut value facing candidate nut
     left, right = center.left(middle), center.right(middle)
 
     for nut in pool:
